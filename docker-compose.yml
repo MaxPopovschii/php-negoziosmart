@@ -1,10 +1,9 @@
-version: '3'
 services:
   mysql:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: my_database
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: negoziosmart
     ports:
       - "3306:3306"
   php:
