@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>📱 Gestione Telefonini</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2f;
+            color: #f1f1f1;
+        }
+
+        header {
+            background-color: #282c34;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #61dafb;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #2e2e3e;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+        }
+
+        form h3 {
+            grid-column: span 2;
+            margin-top: 0;
+            color: #61dafb;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #aaa;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #1e1e2f;
+            color: #f1f1f1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #61dafb;
+            color: #1e1e2f;
+            border-radius: 5px;
+            cursor: pointer;
+            grid-column: span 2;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #21a1f1;
+        }
+
+        p {
+            background-color: #2e2e3e;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 5px solid #61dafb;
+            border-radius: 5px;
+        }
+
+        .stat, div.marca-valore {
+            background-color: #2e2e3e;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        h2, h3 {
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        .icon {
+            margin-right: 5px;
+        }
+
+        /* Per rendere la pagina responsive */
+        @media (max-width: 600px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📱 Gestione Telefonini - Pannello Amministratore</h1>
+    </header>
+
+    <main>
+        <form method="post">
+            <h3>➕ Aggiungi Telefonino</h3>
+            <label for="marca">Marca:</label>
+            <input id="marca" name="marca" required autocomplete="on">
+            <label for="modello">Modello:</label>
+            <input id="modello" name="modello" required autocomplete="on">
+            <label for="prezzo">Prezzo (€):</label>
+            <input id="prezzo" name="prezzo" type="number" step="0.01" required autocomplete="off">
+            <label for="sconto">Sconto (%):</label>
+            <input id="sconto" name="sconto" type="number" step="0.01" required autocomplete="off">
+            <label for="quantita">Quantità:</label>
+            <input id="quantita" name="quantita" type="number" required autocomplete="off">
+            <button name="aggiungi">Aggiungi</button>
+        </form>
+
+        <form method="post">
+            <h3>✏️ Aggiorna Prezzo e Sconto</h3>
+            <label for="id_agg">ID:</label>
+            <input id="id_agg" name="id_agg" type="number" required autocomplete="off">
+            <label for="prezzo_agg">Nuovo Prezzo (€):</label>
+            <input id="prezzo_agg" name="prezzo_agg" type="number" step="0.01" required autocomplete="off">
+            <label for="sconto_agg">Nuovo Sconto (%):</label>
+            <input id="sconto_agg" name="sconto_agg" type="number" step="0.01" required autocomplete="off">
+            <button name="aggiorna">Aggiorna</button>
+        </form>
+
+        <form method="post">
+            <h3>🗑️ Cancella Telefonino</h3>
+            <label for="marca_del">Marca:</label>
+            <input id="marca_del" name="marca_del" required autocomplete="on">
+            <label for="modello_del">Modello:</label>
+            <input id="modello_del" name="modello_del" required autocomplete="on">
+            <button name="cancella">Cancella</button>
+        </form>
+
+        <form method="post">
+            <h3>📦 Aumenta Quantità</h3>
+            <label for="id_aum">ID:</label>
+            <input id="id_aum" name="id_aum" type="number" required autocomplete="off">
+            <label for="quantita_aum">Quantità da Aumentare:</label>
+            <input id="quantita_aum" name="quantita_aum" type="number" required autocomplete="off">
+            <button name="aumenta">Aumenta</button>
+        </form>
+
+        <form method="post">
+            <h3>Gestione Vendita</h3>
+            Cliente ID: <input name="id_cliente" type="number" required>
+            Telefonino ID: <input name="id_telefonino" type="number" required>
+            <button name="vendi">Vendi</button>
+        </form>
+
+        <h2>📋 Elenco Telefonini</h2>
+        <?php foreach ($telefonini as $tel): ?>
+            <p>📱 <?= htmlspecialchars($tel['marca']) ?> <?= htmlspecialchars($tel['modello']) ?> - Prezzo: <?= htmlspecialchars($tel['prezzo']) ?>€ - Sconto: <?= htmlspecialchars($tel['sconto']) ?>% - Quantità: <?= htmlspecialchars($tel['quantita']) ?></p>
+        <?php endforeach; ?>
+
+        <div class="stat">💰 Valore Totale (senza sconto): <?= $totale ?>€</div>
+
+        <h3>💼 Valore per Marca (con sconto):</h3>
+        <?php foreach ($valoriMarca as $vm): ?>
+            <div class="marca-valore"><?= htmlspecialchars($vm['marca']) ?> - <?= number_format(intval($vm['valore']), 0, ',', '.') ?>€</div>
+        <?php endforeach; ?>
+
+        <div class="stat">📊 Prezzo Min: <?= $minmax['min'] ?>€ - Max: <?= $minmax['max'] ?>€</div>
+    </main>
+</body>
+</html>
