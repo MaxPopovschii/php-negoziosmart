@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendita Telefonino</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+            color: #333;
+        }
+        nav {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .telefoni-lista, form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h3 {
+            margin-top: 0;
+            color: #007BFF;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="telefoni_view.html">Gestione Telefonini</a></li>
+            <li><a href="vendita_view.html">Vendita</a></li>
+            <li><a href="fattura_view.html">Fattura</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="telefoni-lista">
+            <h3>📱 Telefoni Disponibili</h3>
+            <?php foreach ($telefonini as $tel): ?>
+                <p>
+                    <strong>ID:</strong> <?= htmlspecialchars($tel['ID']) ?> → 
+                    <strong><?= htmlspecialchars($tel['marca']) ?> <?= htmlspecialchars($tel['modello']) ?></strong> | 
+                    <strong>Prezzo:</strong> €<?= htmlspecialchars($tel['prezzo']) ?> | 
+                    <strong>Q.tà:</strong> <?= htmlspecialchars($tel['quantita']) ?>
+                </p>
+            <?php endforeach; ?>
+        </div>
+
+        <form method="post">
+            <h3>Vendi Telefonino</h3>
+            <label for="cliente_id">Cliente:</label>
+            <select name="cliente_id" id="cliente_id" required>
+                <?php foreach ($clienti as $cli): ?>
+                    <option value="<?= $cli['id'] ?>">
+                        <?= htmlspecialchars($cli['nome'] . ' ' . $cli['cognome']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            
+            <label for="telefono_id">ID Telefono da vendere:</label>
+            <input name="telefono_id" id="telefono_id" type="number" required placeholder="Inserisci ID telefono">
+
+            <button name="vendi">Vendi</button>
+        </form>
+    </div>
+</body>
+</html>

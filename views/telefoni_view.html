@@ -2,13 +2,41 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📱 Gestione Telefonini</title>
     <style>
-        body {
+        /* Stili della barra di navigazione */
+        nav {
+            background-color: #007BFF;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        nav ul {
+            list-style: none;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e2f;
-            color: #f1f1f1;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
+            color: #333;
         }
 
         header {
@@ -25,68 +53,68 @@
         }
 
         main {
-            max-width: 800px;
+            max-width: 900px;
             margin: 20px auto;
             padding: 20px;
         }
 
         form {
-            background-color: #2e2e3e;
-            padding: 15px 20px;
+            background-color: white;
+            padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
             box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-gap: 10px;
+            grid-gap: 15px;
         }
 
         form h3 {
             grid-column: span 2;
             margin-top: 0;
-            color: #61dafb;
+            color: #007BFF;
         }
 
         label {
             margin-bottom: 5px;
-            color: #aaa;
+            color: #555;
         }
 
-        input {
-            padding: 8px;
-            border: 1px solid #444;
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #1e1e2f;
-            color: #f1f1f1;
+            background-color: white;
+            color: #333;
             width: 100%;
             box-sizing: border-box;
         }
 
         button {
-            padding: 8px 15px;
+            padding: 10px 15px;
             border: none;
-            background-color: #61dafb;
-            color: #1e1e2f;
+            background-color: #007BFF;
+            color: white;
             border-radius: 5px;
             cursor: pointer;
             grid-column: span 2;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #21a1f1;
+            background-color: #0056b3;
         }
 
         p {
-            background-color: #2e2e3e;
+            background-color: white;
             padding: 10px;
             margin: 5px 0;
-            border-left: 5px solid #61dafb;
+            border-left: 5px solid #007BFF;
             border-radius: 5px;
         }
 
-        .stat, div.marca-valore {
-            background-color: #2e2e3e;
+        .stat, .marca-valore {
+            background-color: white;
             padding: 10px;
             margin: 8px 0;
             border-radius: 5px;
@@ -94,7 +122,7 @@
         }
 
         h2, h3 {
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid #ccc;
             padding-bottom: 5px;
             margin-top: 30px;
         }
@@ -103,7 +131,7 @@
             margin-right: 5px;
         }
 
-        /* Per rendere la pagina responsive */
+        /* Responsive Design */
         @media (max-width: 600px) {
             form {
                 grid-template-columns: 1fr;
@@ -116,11 +144,20 @@
     </style>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="telefoni_view.html">Gestione Telefonini</a></li>
+            <li><a href="vendita_view.html">Vendita</a></li>
+            <li><a href="fattura_view.html">Fattura</a></li>
+        </ul>
+    </nav>
     <header>
         <h1>📱 Gestione Telefonini - Pannello Amministratore</h1>
     </header>
 
     <main>
+        <!-- Aggiungi Telefonino -->
         <form method="post">
             <h3>➕ Aggiungi Telefonino</h3>
             <label for="marca">Marca:</label>
@@ -136,6 +173,7 @@
             <button name="aggiungi">Aggiungi</button>
         </form>
 
+        <!-- Aggiorna Prezzo e Sconto -->
         <form method="post">
             <h3>✏️ Aggiorna Prezzo e Sconto</h3>
             <label for="id_agg">ID:</label>
@@ -147,6 +185,7 @@
             <button name="aggiorna">Aggiorna</button>
         </form>
 
+        <!-- Cancella Telefonino -->
         <form method="post">
             <h3>🗑️ Cancella Telefonino</h3>
             <label for="marca_del">Marca:</label>
@@ -156,6 +195,7 @@
             <button name="cancella">Cancella</button>
         </form>
 
+        <!-- Aumenta Quantità -->
         <form method="post">
             <h3>📦 Aumenta Quantità</h3>
             <label for="id_aum">ID:</label>
@@ -165,18 +205,23 @@
             <button name="aumenta">Aumenta</button>
         </form>
 
+        <!-- Gestione Vendita -->
         <form method="post">
-            <h3>Gestione Vendita</h3>
-            Cliente ID: <input name="id_cliente" type="number" required>
-            Telefonino ID: <input name="id_telefonino" type="number" required>
+            <h3>💼 Gestione Vendita</h3>
+            <label for="id_cliente">Cliente ID:</label>
+            <input id="id_cliente" name="id_cliente" type="number" required>
+            <label for="id_telefonino">Telefonino ID:</label>
+            <input id="id_telefonino" name="id_telefonino" type="number" required>
             <button name="vendi">Vendi</button>
         </form>
 
+        <!-- Elenco Telefonini -->
         <h2>📋 Elenco Telefonini</h2>
         <?php foreach ($telefonini as $tel): ?>
             <p>📱 <?= htmlspecialchars($tel['marca']) ?> <?= htmlspecialchars($tel['modello']) ?> - Prezzo: <?= htmlspecialchars($tel['prezzo']) ?>€ - Sconto: <?= htmlspecialchars($tel['sconto']) ?>% - Quantità: <?= htmlspecialchars($tel['quantita']) ?></p>
         <?php endforeach; ?>
 
+        <!-- Statistiche -->
         <div class="stat">💰 Valore Totale (senza sconto): <?= $totale ?>€</div>
 
         <h3>💼 Valore per Marca (con sconto):</h3>
