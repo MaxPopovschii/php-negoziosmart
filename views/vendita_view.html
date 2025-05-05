@@ -4,118 +4,213 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vendita Telefonino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --success-color: #059669;
+            --background-color: #f1f5f9;
+            --card-background: #ffffff;
+            --text-color: #1e293b;
+            --border-color: #e2e8f0;
+            --hover-color: #3b82f6;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --border-radius: 0.75rem;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #f2f2f2, #e6e6e6);
-            color: #333;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
         nav {
-            background-color: #007BFF;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
         }
+
         nav ul {
             list-style: none;
-            margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
+            gap: 2rem;
         }
-        nav ul li {
-            margin: 0 15px;
-        }
+
         nav ul li a {
             text-decoration: none;
             color: white;
-            font-size: 16px;
-            font-weight: bold;
-            transition: color 0.3s ease;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+
         nav ul li a:hover {
-            color: #FFD700;
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
         }
+
         .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
         }
-        .telefoni-lista, form {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
+
+        .telefoni-lista, .form-container {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
         }
+
+        .telefono-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+
+        .telefono-item:last-child {
+            border-bottom: none;
+        }
+
         h3 {
-            margin-top: 0;
-            color: #007BFF;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #555;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
         }
-        select, input, button {
+
+        select, input {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
         button {
-            background-color: #007BFF;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--primary-color);
             color: white;
             border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
+
         button:hover {
-            background-color: #0056b3;
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .telefono-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="telefoni_view.html">Gestione Telefonini</a></li>
-            <li><a href="vendita_view.html">Vendita</a></li>
-            <li><a href="fattura_view.html">Fattura</a></li>
+            <li><a href="home.html">🏠 Home</a></li>
+            <li><a href="telefoni_view.html">📱 Gestione Telefonini</a></li>
+            <li><a href="vendita_view.html">💰 Vendita</a></li>
+            <li><a href="fattura_view.html">📄 Fattura</a></li>
         </ul>
     </nav>
+
     <div class="container">
         <div class="telefoni-lista">
             <h3>📱 Telefoni Disponibili</h3>
             <?php foreach ($telefonini as $tel): ?>
-                <p>
-                    <strong>ID:</strong> <?= htmlspecialchars($tel['ID']) ?> → 
-                    <strong><?= htmlspecialchars($tel['marca']) ?> <?= htmlspecialchars($tel['modello']) ?></strong> | 
-                    <strong>Prezzo:</strong> €<?= htmlspecialchars($tel['prezzo']) ?> | 
-                    <strong>Q.tà:</strong> <?= htmlspecialchars($tel['quantita']) ?>
-                </p>
+                <div class="telefono-item">
+                    <span class="id">ID: <?= htmlspecialchars($tel['ID']) ?></span>
+                    <span class="modello"><?= htmlspecialchars($tel['marca']) ?> <?= htmlspecialchars($tel['modello']) ?></span>
+                    <span class="prezzo">€<?= htmlspecialchars($tel['prezzo']) ?></span>
+                    <span class="quantita">Q.tà: <?= htmlspecialchars($tel['quantita']) ?></span>
+                </div>
             <?php endforeach; ?>
         </div>
 
-        <form method="post">
-            <h3>Vendi Telefonino</h3>
-            <label for="cliente_id">Cliente:</label>
-            <select name="cliente_id" id="cliente_id" required>
-                <?php foreach ($clienti as $cli): ?>
-                    <option value="<?= $cli['id'] ?>">
-                        <?= htmlspecialchars($cli['nome'] . ' ' . $cli['cognome']) ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-            
-            <label for="telefono_id">ID Telefono da vendere:</label>
-            <input name="telefono_id" id="telefono_id" type="number" required placeholder="Inserisci ID telefono">
+        <div class="form-container">
+            <form method="post">
+                <h3>💰 Vendi Telefonino</h3>
+                <div class="form-group">
+                    <label for="cliente_id">👤 Seleziona Cliente:</label>
+                    <select name="cliente_id" id="cliente_id" required>
+                        <?php foreach ($clienti as $cli): ?>
+                            <option value="<?= $cli['id'] ?>">
+                                <?= htmlspecialchars($cli['nome'] . ' ' . $cli['cognome']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono_id">📱 ID Telefono:</label>
+                    <input name="telefono_id" id="telefono_id" type="number" required 
+                           placeholder="Inserisci l'ID del telefono da vendere">
+                </div>
 
-            <button name="vendi">Vendi</button>
-        </form>
+                <button type="submit" name="vendi">💰 Completa Vendita</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
